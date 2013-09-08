@@ -40,30 +40,29 @@ function calculateDistances() {
     case "Huntsman Hall": origin1 = "Jon M. Huntsman Hall"; break;
     case "Compass": origin1 = "37th & Locust"; break;
     case "Button": origin1 = "Van Pelt Library"; break;
-    case "Tampons": origin1 = "39th and Locust"; break;
+    case "Tampons": origin1 = "39th and Locust, Philadelphia"; break;
     case "Leidy Labs": origin1 = "3740 Hamilton Walk, Philadelphia"; break;
     case "Student Health Services": origin1 = "3535 Market Street, Philadelphia"; break;
-    case "Fox Fitness Center": origin1 = "Weiss Pavilion"; break;
+    case "Fox Fitness Center": origin1 = "Franklin Field"; break;
     case "Women's Center": origin1 = "3643 LOCUST WALK, PHILADELPHIA, PA 19104"; break;
     case "Commons (1920)": origin1 = "1920 Commons; Philadelphia"; break;
     case "Bodek Lounge": origin1 = "Houston Hall, Philadelphia"; break;
     case "Chemistry Building": origin1 = "34th and Spruce, Philadelphia"; break;
     case "Castor Building": origin1 = "3701 Locust Walk, Philadelphia"; break;
     case "Weingarten": origin1 = "3702 Spruce Street, Philadelphia"; break;
+
     case "Stouffer Residence Hall": origin1 = "3702 Spruce Street, Philadelphia"; break;
-    /*case "Mayer Residence Hall": origin1 = ""
-    case "Sansom East Place":
-    case "Sansom West Place":
-    case "Riepe"
-    case "Ware"
-    case "Fisher Hassenfield"
-    case "Hospital of University of Pennsylvania (HUP)"
-    case "Steinberg Hall-Dietrich Hall"
-    case "Jerome Fisher Hall"
-    case "Book Center"
-    case "Franklin Building": origin1 = "3535 Market Street, Philadelphia"; break;
-    case "Ice Rink": origin1 = 
-    case "Rave Cinemas"*/
+    case "Mayer Residence Hall": origin1 = "3817 Spruce Street, Philadelphia"; break;
+    case "Sansom Place East": origin1 = "3600 Chestnut Street, Philadelphia"; break;
+    case "Sansom West Place": origin1 = "3650 Chestnut Street, Philadelphia"; break;
+    case "Riepe": origin1 = "3700 Spruce Street, Philadelphia"; break;
+    case "Ware": origin1 = "3700 Spruce Street, Philadelphia"; break
+    case "Fisher Hassenfield": origin1 = "3700 Spruce Street, Philadelphia"; break;
+    case "Steinberg Hall-Dietrich Hall": origin1 = "255 South 38th Street, Philadelphia"; break;
+    case "Jerome Fisher Hall": origin1 = "3537 Locust Walk, Philadelphia";
+    case "Book Center": origin1 = "Penn Book Center, Philadelphia"; break;
+    case "Franklin Building": origin1 = "3451 Walnut Street, Philadelphia"; break;
+    case "Ice Rink": origin1 = "3130 Walnut Street"; break;
     case "Platt Student Performing Arts Center": origin1 = "3702 Spruce Street, Philadelphia"; break;
 
 
@@ -89,12 +88,25 @@ function calculateDistances() {
     case "Tampons": destinationA = "39th and Locust"; break;
     case "Leidy Labs": destinationA = "3740 Hamilton Walk, Philadelphia"; break;
     case "Student Health Services": destinationA = "3535 Market Street, Philadelphia"; break;
-    case "Fox Fitness Center": destinationA = "Weiss Pavilion"; break;
+    case "Fox Fitness Center": destinationA = "Franklin Field"; break;
     case "Women's Center": destinationA = "3643 LOCUST WALK, PHILADELPHIA, PA 19104"; break;
     case "Commons (1920)": destinationA = "1920 Commons; Philadelphia"; break;
     case "Bodek Lounge": destinationA = "Houston Hall, Philadelphia"; break;
     case "Chemistry Building": destinationA = "34th and Spruce, Philadelphia"; break;
     case "Castor Building": destinationA = "3701 Locust Walk, Philadelphia"; break;
+    case "Stouffer Residence Hall": destinationA = "3702 Spruce Street, Philadelphia"; break;
+    case "Mayer Residence Hall": destinationA = "3817 Spruce Street, Philadelphia"; break;
+    case "Sansom Place East": destinationA = "3600 Chestnut Street, Philadelphia"; break;
+    case "Sansom West Place": destinationA = "3650 Chestnut Street, Philadelphia"; break;
+    case "Riepe": destinationA = "3700 Spruce Street, Philadelphia"; break;
+    case "Ware": destinationA = "3700 Spruce Street, Philadelphia"; break
+    case "Fisher Hassenfield": destinationA = "3700 Spruce Street, Philadelphia"; break;
+    case "Steinberg Hall-Dietrich Hall": destinationA = "255 South 38th Street, Philadelphia"; break;
+    case "Jerome Fisher Hall": destinationA = "3537 Locust Walk, Philadelphia";
+    case "Book Center": destinationA = "Penn Book Center, Philadelphia"; break;
+    case "Franklin Building": destinationA = "3451 Walnut Street, Philadelphia"; break;
+    case "Ice Rink": destinationA = "3130 Walnut Street"; break;
+    case "Platt Student Performing Arts Center": destinationA = "3702 Spruce Street, Philadelphia"; break;
 
   }
   var service = new google.maps.DistanceMatrixService();
