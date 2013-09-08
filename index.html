@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PennMap</title>
+    <title>PennMaps</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -12,16 +12,17 @@
     <script src="script.js"></script>
   </head>
 <body>
-	<div id="header">
-	<p>PennMap</p>
+    <div id="header">
+    <p id="title"> PENNMAPS          </p>
 </div>
-	<div>
-	<input type="text" name="Start" placeholder="Start"/>
-	<input type="text" name="Destination" placeholder="Destination" />
-	<button onclick="return calculateDistances();">Go</button>
+    <div>
+    <input type="text" name="Start" placeholder="WHERE IN PENN ARE YOU NOW"/>
+    <input type="text" name="Destination" placeholder="WHERE IN PENN ARE YOU GOING" />
+    <br>
+    <button onclick="return calculateDistances();">PENN MAP ME THERE</button>
 
 <script>
-var tags = [ "Addams Fine Arts Hall", "College Hall", "Anatomy Chemistry Building", "Annenberg Center", "ARCH", "Claudia Cohen Hall", "Stiteler Hall", "Fisher-Bennett Hall", "Music Building", "Williams Hall", "Palestra", "Bookstore", "Counseling and Psychological Services", "David Rittenhouse Labs","School of Engineering and Applied Science", "Fagin Hall", "Fresh Grocer", "Gregory College House", "Harrison College House", "Harnwell College House", "Hill College House", "Hillel", "Houston Hall", "Huntsman Hall", "International House", "Kelly Writers House", "Kings Court English College House", "Levine Hall", "McNeil Building", "Meyerson Hall", "Moore School Building", "Netter Center", "Pottruck Health and Fitness Center",  "Rodin College House", "Skirkanich Hall", "Student Financial Services", "Women's Center", "CVS on 40th", "CVS on 34th", "University of Pennsylvania Museum", "Van Pelt Library", "Towne Building", "Compass", "Penn Park", "Student Health Services", "Leidy Labs", "Tampons", "Button", "Franklin Field", "Irvine Auditorium", "Fox Fitness Center", "Commons (1920)", "Bodek Lounge", "Chemistry Building", "Castor Building", "Du Bois College House", "Weingarten", "Stouffer Residence Hall", "Mayer Residence Hall", "Sansom Place East", "Sansom Place West", "Riepe", "Ware", "Fisher Hassenfield", "Hospital of University of Pennsylvania (HUP)", "Steinberg Hall-Dietrich Hall", "Jerome Fisher Hall", "Book Center", "Franklin Building", "Ice Rink", "Rave Cinemas", "Platt Student Performing Arts Center", ];
+var tags = [ "Addams Fine Arts Hall", "College Hall", "Anatomy Chemistry Building", "Annenberg Center", "ARCH", "Claudia Cohen Hall", "Stiteler Hall", "Fisher-Bennett Hall", "Music Building", "Williams Hall", "Palestra", "Bookstore", "Counseling and Psychological Services", "David Rittenhouse Labs","School of Engineering and Applied Science", "Fagin Hall", "Fresh Grocer", "Gregory College House", "Harrison College House", "Harnwell College House", "Hill College House", "Hillel", "Houston Hall", "Huntsman Hall", "International House", "Kelly Writers House", "Kings Court English College House", "Levine Hall", "McNeil Building", "Meyerson Hall", "Moore School Building", "Netter Center", "Pottruck Health and Fitness Center",  "Rodin College House", "Skirkanich Hall", "Student Financial Services", "Women's Center", "CVS on 40th", "CVS on 34th", "University of Pennsylvania Museum", "Van Pelt Library", "Towne Building", "Compass", "Penn Park", "Student Health Services", "Leidy Labs", "Tampons", "Button", "Franklin Field", "Irvine Auditorium", "Fox Fitness Center", "Commons (1920)", "Bodek Lounge", "Chemistry Building", "Castor Building", "Du Bois College House", "Weingarten", "Stouffer Residence Hall", "Mayer Residence Hall", "Sansom Place East", "Sansom Place West", "Riepe", "Ware", "Fisher Hassenfield", "Hospital of University of Pennsylvania (HUP)", "Steinberg Hall-Dietrich Hall", "Jerome Fisher Hall", "Book Center", "Franklin Building", "Ice Rink", "Rave Cinemas", "Platt Student Performing Arts Center", "Benjamin Franklin Statue", "Benjamin Franklin Bench", "Love Statue",];
 $( "input" ).autocomplete({
   source: function( request, response ) {
           var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
@@ -32,9 +33,8 @@ $( "input" ).autocomplete({
 });
 </script>
 
-	</div>
-	<div id="outputDiv"></div>
-	<div id="map-canvas"></div>
-
+    </div>
+    <div id="outputDiv"></div>
+    <div id="map-canvas"></div>
 </body>
 </html>

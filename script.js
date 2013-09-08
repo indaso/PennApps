@@ -3,12 +3,15 @@ var geocoder;
 var bounds = new google.maps.LatLngBounds();
 var markersArray = [];
 
-
+$(document).ready(function(){
+  $("#map-canvas").hide();
+});
 
 var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
 var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
 
 function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
   var opts = {
     center: new google.maps.LatLng(55.53, 9.4),
     zoom: 20,
@@ -16,9 +19,13 @@ function initialize() {
   };
   map = new google.maps.Map(document.getElementById('map-canvas'), opts);
   geocoder = new google.maps.Geocoder();
+  directionsDisplay.setMap(map);
 }
 
 function calculateDistances() {
+  $("#map-canvas").show();
+
+  google.maps.event.trigger(map,'resize');
   var origin1 = $('input[name=Start]').val();
   var destinationA = $('input[name=Destination]').val();
 
@@ -38,19 +45,18 @@ function calculateDistances() {
     case "Hill College House": origin1 = "Hill College House, Philadelphia"; break;
     case "Hillel": origin1 = "215 S 39th St, Philadelphia, PA 19104"; break;
     case "Huntsman Hall": origin1 = "Jon M. Huntsman Hall"; break;
-    case "Compass": origin1 = "37th & Locust"; break;
+    case "Compass": origin1 = "37th & Locust, Philadelphia, PA"; break;
     case "Button": origin1 = "Van Pelt Library"; break;
     case "Tampons": origin1 = "39th and Locust, Philadelphia"; break;
     case "Leidy Labs": origin1 = "3740 Hamilton Walk, Philadelphia"; break;
     case "Student Health Services": origin1 = "3535 Market Street, Philadelphia"; break;
     case "Fox Fitness Center": origin1 = "Franklin Field"; break;
     case "Women's Center": origin1 = "3643 LOCUST WALK, PHILADELPHIA, PA 19104"; break;
-    case "Commons (1920)": origin1 = "1920 Commons; Philadelphia"; break;
+    case "Commons (1920)": origin1 = "1920 Commons, Philadelphia"; break;
     case "Bodek Lounge": origin1 = "Houston Hall, Philadelphia"; break;
     case "Chemistry Building": origin1 = "34th and Spruce, Philadelphia"; break;
     case "Castor Building": origin1 = "3701 Locust Walk, Philadelphia"; break;
     case "Weingarten": origin1 = "3702 Spruce Street, Philadelphia"; break;
-
     case "Stouffer Residence Hall": origin1 = "3702 Spruce Street, Philadelphia"; break;
     case "Mayer Residence Hall": origin1 = "3817 Spruce Street, Philadelphia"; break;
     case "Sansom Place East": origin1 = "3600 Chestnut Street, Philadelphia"; break;
@@ -59,12 +65,16 @@ function calculateDistances() {
     case "Ware": origin1 = "3700 Spruce Street, Philadelphia"; break
     case "Fisher Hassenfield": origin1 = "3700 Spruce Street, Philadelphia"; break;
     case "Steinberg Hall-Dietrich Hall": origin1 = "255 South 38th Street, Philadelphia"; break;
-    case "Jerome Fisher Hall": origin1 = "3537 Locust Walk, Philadelphia";
+    case "Jerome Fisher Hall": origin1 = "3537 Locust Walk, Philadelphia"; break;
     case "Book Center": origin1 = "Penn Book Center, Philadelphia"; break;
     case "Franklin Building": origin1 = "3451 Walnut Street, Philadelphia"; break;
     case "Ice Rink": origin1 = "3130 Walnut Street"; break;
     case "Platt Student Performing Arts Center": origin1 = "3702 Spruce Street, Philadelphia"; break;
-
+    case "Williams Hall": origin1 = "255 South 36th Street, Philadelphia"; break;
+    case "Benjamin Franklin Statue": origin1 = "College Hall, Philadelphia"; break;
+    case "Benjamin Franklin Bench": origin1 = "37th & Locust, Philadelphia, PA"; break;
+    case "Love Statue": origin1 = "36th & Locust, Philadelphia, PA"; break;
+    case "Penn Park": origin1 = "Penn Park Philadelphia"; break;
 
   }
   switch(destinationA) {
@@ -83,9 +93,9 @@ function calculateDistances() {
     case "Hill College House": destinationA = "Hill College House, Philadelphia"; break;
     case "Hillel": destinationA = "215 S 39th St, Philadelphia, PA 19104"; break;
     case "Huntsman Hall": destinationA = "Jon M. Huntsman Hall"; break;
-    case "Compass": destinationA = "37th & Locust"; break;
+    case "Compass": destinationA = "37th & Locust, Philadelphia"; break;
     case "Button": destinationA = "Van Pelt Library"; break;
-    case "Tampons": destinationA = "39th and Locust"; break;
+    case "Tampons": destinationA = "39th and Locust, Philadelphia"; break;
     case "Leidy Labs": destinationA = "3740 Hamilton Walk, Philadelphia"; break;
     case "Student Health Services": destinationA = "3535 Market Street, Philadelphia"; break;
     case "Fox Fitness Center": destinationA = "Franklin Field"; break;
@@ -102,11 +112,16 @@ function calculateDistances() {
     case "Ware": destinationA = "3700 Spruce Street, Philadelphia"; break
     case "Fisher Hassenfield": destinationA = "3700 Spruce Street, Philadelphia"; break;
     case "Steinberg Hall-Dietrich Hall": destinationA = "255 South 38th Street, Philadelphia"; break;
-    case "Jerome Fisher Hall": destinationA = "3537 Locust Walk, Philadelphia";
+    case "Jerome Fisher Hall": destinationA = "3537 Locust Walk, Philadelphia"; break;
     case "Book Center": destinationA = "Penn Book Center, Philadelphia"; break;
     case "Franklin Building": destinationA = "3451 Walnut Street, Philadelphia"; break;
     case "Ice Rink": destinationA = "3130 Walnut Street"; break;
     case "Platt Student Performing Arts Center": destinationA = "3702 Spruce Street, Philadelphia"; break;
+    case "Williams Hall": destinationA = "255 South 36th Street, Philadelphia"; break;
+    case "Benjamin Franklin Statue": destinationA = "College Hall, Philadelphia"; break;
+    case "Benjamin Franklin Bench": origin1 = "37th & Locust, Philadelphia, PA"; break;
+    case "Love Statue": destinationA = "36th & Locust, Philadelphia, PA"; break;
+    case "Penn Park": destinationA = "Penn Park Philadelphia"; break;
 
   }
   var service = new google.maps.DistanceMatrixService();
@@ -119,6 +134,19 @@ function calculateDistances() {
       avoidHighways: false,
       avoidTolls: false
     }, callback);
+  var directionsService = new google.maps.DirectionsService();
+  directionsService.route({
+      origin: origin1,
+      destination: destinationA,
+      travelMode: google.maps.TravelMode.WALKING,
+      unitSystem: google.maps.UnitSystem.IMPERIAL
+    }, function(response,status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      console.log('here')
+      console.log(response);
+      directionsDisplay.setDirections(response);
+    }
+  })
   return false;
 }
 
@@ -138,9 +166,10 @@ function callback(response, status) {
       addMarker(origins[i], false);
       for (var j = 0; j < results.length; j++) {
         addMarker(destinations[j], true);
-        outputDiv.innerHTML += origins[i] + ' to ' + destinations[j]
-            + ': ' + results[j].distance.text + ' in '
-            + results[j].duration.text + '<br>';
+        outputDiv.innerHTML += /*origins[i] + ' to ' + destinations[j]
+            + ': ' + '<br>' +*/ 'It is ' +results[j].distance.text + 
+            ' away -> You need ' + results[j].duration.text + 
+           '<br>';
       }
     }
   }
@@ -178,4 +207,7 @@ function deleteOverlays() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
+https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000
+chart.googleapis.com
+https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000
+chart.googleapis.com
