@@ -1,0 +1,69 @@
+html {
+	background-color: #F0F0F0;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body, #map-canvas {
+	margin: 0;
+	padding: 0;
+	height: 75%;
+	width: 75%;
+	margin: auto;
+}
+/*#map-canvas {
+	display: none;
+}*/
+div {
+	text-align: center;
+}
+p {
+	font-size: 60px;
+	font-family: times, Verdana, sans-serif;
+	color: navy;
+	text-align: center;
+	display: block;
+	width: 700px;
+	margin: auto;
+	background-color: #99CCCC;
+	padding-top: 50px;
+}
+#header {
+	background-color: #99CCCC;
+	height: 200px;
+	width: 100%;
+	display: block;
+}
+
+input {
+	height: 75px;
+	width: 700px;
+	font-size: 50px;
+	-webkit-box-shadow: 0 0 8px #FFD700;
+    -moz-box-shadow: 0 0 8px #FFD700;
+    box-shadow: 0 0 8px navy;
+    text-align: center;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#sub {
+	height: 35px;
+	background-color: yellow;
+	display: block;
+	margin: auto;
+	font-size: 20px;
+	margin-top:20px;
+}
+
+form {
+	font-size: 100px;
+	display: block;
+}
+
+button {
+	margin-top: 20px;
+}
+

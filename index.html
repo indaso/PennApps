@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PennMap</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDavzBqy7Y3Vjc7rSOHsSktQeZFn3_LJhU&sensor=false"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="script.js"></script>
+  </head>
+<body>
+	<div id="header">
+	<p>PennMap</p>
+</div>
+	<div>
+	<input type="text" name="Start" placeholder="Start"/>
+	<input type="text" name="Destination" placeholder="Destination" />
+	<button onclick="return calculateDistances();">Go</button>
+
+<script>
+var tags = [ "Addams Fine Arts Hall", "College Hall", "Anatomy Chemistry Building", "Annenberg Center", "ARCH", "Claudia Cohen Hall", "Stiteler Hall", "Fisher-Bennett Hall", "Music Building", "Williams Hall", "Palestra", "Bookstore", "Counseling and Psychological Services", "David Rittenhouse Labs","School of Engineering and Applied Science", "Fagin Hall", "Fresh Grocer", "Gregory College House", "Harrison College House", "Harnwell College House", "Hill College House", "Hillel", "Houston Hall", "Huntsman Hall", "International House", "Kelly Writers House", "King's Court English College House", "Levine Hall", "McNeil Building", "Meyerson Hall", "Moore School Building", "Netter Center", "Pottruck Health and Fitness Center",  "Rodin College House", "Skirkanich Hall", "Student Financial Services", "Women's Center", "CVS on 40th", "CVS on 34th", "University of Pennsylvania Museum", "Van Pelt Library", "Towne Building", "Compass", "Penn Park", "Student Health Services", "Leidy Labs", "Tampons", "Button", "Franklin Field", "Irvine Auditorium", "Fox Fitness Center", "Commons (1920)", "Bodek Lounge", "Chemistry Building", "Castor Building", "Du Bois College House", "Weingarten", ];
+$( "input" ).autocomplete({
+  source: function( request, response ) {
+          var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+          response( $.grep( tags, function( item ){
+              return matcher.test( item );
+          }) );
+      }
+});
+</script>
+
+	</div>
+	<div id="outputDiv"></div>
+	<div id="map-canvas"></div>
+
+</body>
+</html>
