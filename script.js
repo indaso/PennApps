@@ -31,7 +31,7 @@ function calculateDistances() {
 
   switch(origin1){
     case "International House": origin1 = "3701 Chestnut St, Philadelphia, PA 19104"; break;
-    case "Kelly Writers House": origin1 = "3805 Locust Walk, Philadelphia"; break;
+    case "Kelly Writers House": origin1 = "Kelly Writers House, Philadelphia, PA"; break;
     case "Moore School Building": origin1 = "200 S 33rd St Philadelphia, PA 19104"; break;
     case "CVS on 34th": origin1 = "3401 Walnut St, Philadelphia, PA 19104"; break;
     case "CVS on 40th": origin1 = "3925 Walnut Street, Philadelphia, PA 19104"; break;
@@ -79,7 +79,7 @@ function calculateDistances() {
   }
   switch(destinationA) {
     case "International House": destinationA = "3701 Chestnut St, Philadelphia, PA 19104"; break;
-    case "Kelly Writers House": destinationA = "3805 Locust Walk, Philadelphia"; break;
+    case "Kelly Writers House": destinationA = "Kelly Writers House, Philadelphia, PA"; break;
     case "Moore School Building": destinationA = "200 S 33rd St Philadelphia, PA 19104"; break;
     case "CVS on 34th": destinationA = "3401 Walnut St, Philadelphia, PA 19104"; break;
     case "CVS on 40th": destinationA = "3925 Walnut Street, Philadelphia, PA 19104"; break;
@@ -126,21 +126,21 @@ function calculateDistances() {
   }
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
-    {
-      origins: [origin1],
-      destinations: [destinationA],
-      travelMode: google.maps.TravelMode.WALKING,
-      unitSystem: google.maps.UnitSystem.IMPERIAL,
-      avoidHighways: false,
-      avoidTolls: false
-    }, callback);
+  {
+    origins: [origin1],
+    destinations: [destinationA],
+    travelMode: google.maps.TravelMode.WALKING,
+    unitSystem: google.maps.UnitSystem.IMPERIAL,
+    avoidHighways: false,
+    avoidTolls: false
+  }, callback);
   var directionsService = new google.maps.DirectionsService();
   directionsService.route({
-      origin: origin1,
-      destination: destinationA,
-      travelMode: google.maps.TravelMode.WALKING,
-      unitSystem: google.maps.UnitSystem.IMPERIAL
-    }, function(response,status) {
+    origin: origin1,
+    destination: destinationA,
+    travelMode: google.maps.TravelMode.WALKING,
+    unitSystem: google.maps.UnitSystem.IMPERIAL
+  }, function(response,status) {
     if (status == google.maps.DirectionsStatus.OK) {
       console.log('here')
       console.log(response);
@@ -167,9 +167,9 @@ function callback(response, status) {
       for (var j = 0; j < results.length; j++) {
         addMarker(destinations[j], true);
         outputDiv.innerHTML += /*origins[i] + ' to ' + destinations[j]
-            + ': ' + '<br>' +*/ 'It is ' +results[j].distance.text + 
-            ' away -> You need ' + results[j].duration.text + 
-           '<br>';
+        + ': ' + '<br>' +*/ 'It is ' +results[j].distance.text + 
+        ' away -> You need ' + results[j].duration.text + 
+        '<br>';
       }
     }
   }
