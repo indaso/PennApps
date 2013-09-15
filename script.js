@@ -75,7 +75,6 @@ function calculateDistances() {
     case "Benjamin Franklin Bench": origin1 = "37th & Locust, Philadelphia, PA"; break;
     case "Love Statue": origin1 = "36th & Locust, Philadelphia, PA"; break;
     case "Penn Park": origin1 = "Penn Park Philadelphia"; break;
-
   }
   switch(destinationA) {
     case "International House": destinationA = "3701 Chestnut St, Philadelphia, PA 19104"; break;
@@ -122,7 +121,6 @@ function calculateDistances() {
     case "Benjamin Franklin Bench": origin1 = "37th & Locust, Philadelphia, PA"; break;
     case "Love Statue": destinationA = "36th & Locust, Philadelphia, PA"; break;
     case "Penn Park": destinationA = "Penn Park Philadelphia"; break;
-
   }
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
