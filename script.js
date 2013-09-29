@@ -2,6 +2,7 @@ var map;
 var geocoder;
 var bounds = new google.maps.LatLngBounds();
 var markersArray = [];
+var mypos;
 
 $(document).ready(function(){
   $("#map-canvas").hide();
@@ -13,13 +14,48 @@ var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=
 function initialize() {
   directionsDisplay = new google.maps.DirectionsRenderer();
   var opts = {
-    center: new google.maps.LatLng(55.53, 9.4),
+    //center: new google.maps.LatLng(55.53, 9.4),
     zoom: 20,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById('map-canvas'), opts);
   geocoder = new google.maps.Geocoder();
   directionsDisplay.setMap(map);
+    // Try HTML5 geolocation
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = new google.maps.LatLng(position.coords.latitude,
+                                       position.coords.longitude);
+      mypos = pos;
+      var infowindow = new google.maps.InfoWindow({
+        map: map,
+        position: pos,
+      });
+
+      map.setCenter(pos);
+    }, function() {
+      handleNoGeolocation(true);
+    })
+  } else {
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+}
+
+function handleNoGeolocation(errorFlag) {
+  if (errorFlag) {
+    var content = 'Error: The Geolocation service failed.';
+  } else {
+    var content = 'Error: Your browser doesn\'t support geolocation.';
+  }
+
+  var options = {
+    map: map,
+    position: new google.maps.LatLng(60, 105),
+  };
+
+  var infowindow = new google.maps.InfoWindow(options);
+  map.setCenter(options.position);
 }
 
 function calculateDistances() {
@@ -30,6 +66,7 @@ function calculateDistances() {
   var destinationA = $('input[name=Destination]').val();
 
   switch(origin1){
+    case "My Location": origin1 = mypos; break;
     case "International House": origin1 = "3701 Chestnut St, Philadelphia, PA 19104"; break;
     case "Kelly Writers House": origin1 = "Kelly Writers House, Philadelphia, PA"; break;
     case "Moore School Building": origin1 = "200 S 33rd St Philadelphia, PA 19104"; break;
@@ -62,7 +99,7 @@ function calculateDistances() {
     case "Sansom Place East": origin1 = "3600 Chestnut Street, Philadelphia"; break;
     case "Sansom West Place": origin1 = "3650 Chestnut Street, Philadelphia"; break;
     case "Riepe": origin1 = "3700 Spruce Street, Philadelphia"; break;
-    case "Ware": origin1 = "3700 Spruce Street, Philadelphia"; break
+    case "Ware": origin1 = "3700 Spruce Street, Philadelphia"; break;
     case "Fisher Hassenfield": origin1 = "3700 Spruce Street, Philadelphia"; break;
     case "Steinberg Hall-Dietrich Hall": origin1 = "255 South 38th Street, Philadelphia"; break;
     case "Jerome Fisher Hall": origin1 = "3537 Locust Walk, Philadelphia"; break;
@@ -75,8 +112,10 @@ function calculateDistances() {
     case "Benjamin Franklin Bench": origin1 = "37th & Locust, Philadelphia, PA"; break;
     case "Love Statue": origin1 = "36th & Locust, Philadelphia, PA"; break;
     case "Penn Park": origin1 = "Penn Park Philadelphia"; break;
+    case "Rave Cinemas": origin1 = "4012 Walnut St, Philadelphia, PA 19104"; break;
   }
   switch(destinationA) {
+    case "My Location": destinationA = mypos; break;
     case "International House": destinationA = "3701 Chestnut St, Philadelphia, PA 19104"; break;
     case "Kelly Writers House": destinationA = "Kelly Writers House, Philadelphia, PA"; break;
     case "Moore School Building": destinationA = "200 S 33rd St Philadelphia, PA 19104"; break;
@@ -108,7 +147,7 @@ function calculateDistances() {
     case "Sansom Place East": destinationA = "3600 Chestnut Street, Philadelphia"; break;
     case "Sansom West Place": destinationA = "3650 Chestnut Street, Philadelphia"; break;
     case "Riepe": destinationA = "3700 Spruce Street, Philadelphia"; break;
-    case "Ware": destinationA = "3700 Spruce Street, Philadelphia"; break
+    case "Ware": destinationA = "3700 Spruce Street, Philadelphia"; break;
     case "Fisher Hassenfield": destinationA = "3700 Spruce Street, Philadelphia"; break;
     case "Steinberg Hall-Dietrich Hall": destinationA = "255 South 38th Street, Philadelphia"; break;
     case "Jerome Fisher Hall": destinationA = "3537 Locust Walk, Philadelphia"; break;
@@ -121,6 +160,8 @@ function calculateDistances() {
     case "Benjamin Franklin Bench": origin1 = "37th & Locust, Philadelphia, PA"; break;
     case "Love Statue": destinationA = "36th & Locust, Philadelphia, PA"; break;
     case "Penn Park": destinationA = "Penn Park Philadelphia"; break;
+    case "Rave Cinemas": destinationA = "4012 Walnut St, Philadelphia, PA 19104"; break;
+
   }
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
@@ -140,11 +181,9 @@ function calculateDistances() {
     unitSystem: google.maps.UnitSystem.IMPERIAL
   }, function(response,status) {
     if (status == google.maps.DirectionsStatus.OK) {
-      console.log('here')
-      console.log(response);
       directionsDisplay.setDirections(response);
     }
-  })
+  });
   return false;
 }
 
@@ -205,7 +244,7 @@ function deleteOverlays() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000
+/*https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000
 chart.googleapis.com
 https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000
-chart.googleapis.com
+chart.googleapis.com*/
